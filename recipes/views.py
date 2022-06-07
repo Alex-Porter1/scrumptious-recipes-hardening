@@ -1,12 +1,12 @@
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
+from django.core.paginator import Paginator
 
 from recipes.forms import RatingForm
 
-from recipes.forms import RecipeForm
 from recipes.models import Recipe
 
 
@@ -27,6 +27,14 @@ class RecipeListView(ListView):
     model = Recipe
     template_name = "recipes/list.html"
     paginate_by = 2
+
+    # def listing(request):
+    #     description = description.objects.all()
+    #     paginator = Paginator(description, 25)  # Show 25 contacts per page.
+
+    #     page_number = request.GET.get('page')
+    #     page_obj = paginator.get_page(page_number)
+    #     return render(request, 'list.html', {'page_obj': page_obj})
 
 
 class RecipeDetailView(DetailView):

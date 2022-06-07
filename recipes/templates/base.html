@@ -29,16 +29,11 @@
         </li>
       </ul>
     </nav>
+    {% block pagination %}
+    {% endblock pagination %}
   </header>
-  <main class="recipe-form">
-    <form method="post">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <div class="control">
-        <button class="button">Create</button>
-      </div>
-    </form>
-  </main>
+{% block content %}
+{% endblock content %}
 </body>
 
 </html>

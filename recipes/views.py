@@ -1,4 +1,5 @@
 from django.shortcuts import redirect, render
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
@@ -19,7 +20,7 @@ def log_rating(request, recipe_id):
                 rating.recipe = Recipe.objects.get(pk=recipe_id)
                 rating.save()
             except Recipe.DoesNotExist:
-                return redirect("recipes_list")
+                return redirect("recipe_list")
     return redirect("recipe_detail", pk=recipe_id)
 
 
@@ -47,21 +48,25 @@ class RecipeDetailView(DetailView):
         return context
 
 
-class RecipeCreateView(CreateView):
+class RecipeCreateView(LoginRequiredMixin, CreateView):
     model = Recipe
     template_name = "recipes/new.html"
-    fields = ["name", "author", "description", "image"]
+    fields = ["name", "description", "image"]
     success_url = reverse_lazy("recipes_list")
 
+    # def form_valid(self, form):
+    #     form.instance.author = self.request.user
+    #     return super().form_valid(form)
 
-class RecipeUpdateView(UpdateView):
+
+class RecipeUpdateView(LoginRequiredMixin, UpdateView):
     model = Recipe
     template_name = "recipes/edit.html"
     fields = ["name", "author", "description", "image"]
     success_url = reverse_lazy("recipes_list")
 
 
-class RecipeDeleteView(DeleteView):
+class RecipeDeleteView(LoginRequiredMixin, DeleteView):
     model = Recipe
     template_name = "recipes/delete.html"
     success_url = reverse_lazy("recipes_list")

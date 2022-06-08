@@ -1,0 +1,14 @@
+{% extends 'paginate.html' %}
+
+{% block content %}
+  <main class="meal_plan-grid">
+    {% for meal_plan in meal_plan_list %}
+      <div class="meal_plan-card">
+        <h2 class="meal_plan-card-title">
+          <a href="{% url 'meal_plan_detail' meal_plan.pk %}">{{ meal_plan.name }}</a>
+        </h2>
+        <p class="meal_plan-card-date">{{ meal_plan.updated }}</p>
+      </div>
+    {% endfor %}
+  </main>
+{% endblock content %}

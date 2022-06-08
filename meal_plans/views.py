@@ -11,7 +11,7 @@ from meal_plans.models import MealPlan
 
 class MealPlanListView(ListView):
     model = MealPlan
-    template_name = "meal_plan/list.html"
+    template_name = "meal_plans/list.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -20,18 +20,18 @@ class MealPlanListView(ListView):
 
 class MealPlanCreateView(LoginRequiredMixin, CreateView):
     model = MealPlan
-    template_name = "meal_plan/new.html"
+    template_name = "meal_plans/new.html"
     fields = ["name", "date", "recipes"]
-    success_url = reverse_lazy("meal_plan_detail")
+    success_url = reverse_lazy("meal_plans_detail")
 
-    def form_valid(self, form):
-        form.instance.owner = self.request.user
-        return super().form_valid(form)
+    # def form_valid(self, form):
+    #     form.instance.owner = self.request.user
+    #     return super().form_valid(form)
 
 
 class MealPlanDetailView(LoginRequiredMixin, DetailView):
     model = MealPlan
-    template_name = "meal_plan/detail.html"
+    template_name = "meal_plans/detail.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -40,12 +40,12 @@ class MealPlanDetailView(LoginRequiredMixin, DetailView):
 
 class MealPlanUpdateView(LoginRequiredMixin, UpdateView):
     model = MealPlan
-    template_name = "meal_plan/edit.html"
+    template_name = "meal_plans/edit.html"
     fields = ["name", "date", "recipes"]
-    success_url = reverse_lazy("meal_plan_list")
+    success_url = reverse_lazy("meal_plans_list")
 
 
 class MealPlanDeleteView(LoginRequiredMixin, DeleteView):
     model = MealPlan
-    template_name = "meal_plan/delete.html"
-    success_url = reverse_lazy("meal_plan_list")
+    template_name = "meal_plans/delete.html"
+    success_url = reverse_lazy("meal_plans_list")

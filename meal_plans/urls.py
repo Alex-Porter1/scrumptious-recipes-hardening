@@ -9,7 +9,7 @@ from meal_plans.views import (
 )
 
 urlpatterns = [
-    path("", MealPlanListView.as_view(), name="meal_plan_list"),
+    path("", MealPlanListView.as_view(), name="meal_plans_list"),
     path("<int:pk>/", MealPlanDetailView.as_view(), name="meal_plan_detail"),
     path(
         "<int:pk>/delete/",

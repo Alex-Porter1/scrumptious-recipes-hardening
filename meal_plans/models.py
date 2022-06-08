@@ -13,3 +13,6 @@ class MealPlan(models.Model):
         USER_MODEL, related_name="meal_plans", on_delete=models.CASCADE
     )
     recipes = models.ManyToManyField("recipes.Recipe", related_name="recipes")
+
+    def __str__(self):
+        return self.name

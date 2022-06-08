@@ -5,7 +5,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
 from django.core.paginator import Paginator
-
+from django.contrib.auth import get_user_model
 from recipes.forms import RatingForm
 
 from recipes.models import Recipe
@@ -70,3 +70,9 @@ class RecipeDeleteView(LoginRequiredMixin, DeleteView):
     model = Recipe
     template_name = "recipes/delete.html"
     success_url = reverse_lazy("recipes_list")
+
+
+class UserListView(ListView):
+    model = get_user_model
+    template_name = "recipes/users.html"
+

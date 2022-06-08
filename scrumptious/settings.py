@@ -42,6 +42,7 @@ LOGOUT_REDIRECT_URL = "recipes_list"
 # Application definition
 
 INSTALLED_APPS = [
+    "meal_plans.apps.MealPlanConfig",
     "recipes.apps.RecipesConfig",
     "tags.apps.TagsConfig",
     "django.contrib.admin",

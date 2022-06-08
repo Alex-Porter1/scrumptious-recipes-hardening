@@ -25,6 +25,9 @@
           <a href="{% url 'admin:index' %}">Admin</a>
         </li>
         <li>
+          <a href="{% url 'user_list' %}">User List</a>
+        </li>
+        <li>
           <a href="{% url 'recipe_new' %}">Write a recipe</a>
         </li>
         {% if user.is_authenticated %}

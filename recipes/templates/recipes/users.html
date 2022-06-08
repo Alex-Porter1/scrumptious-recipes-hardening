@@ -1,0 +1,17 @@
+{% extends 'paginate.html' %}
+
+{% block content %}
+  <main class="recipe-grid">
+    {% for user in user_list %}
+        {% for recipe in user.recipe.all %}
+      <div class="recipe-card">
+        <h2 class="recipe-card-title">
+          <a href="{% url 'recipe_detail' recipe.pk %}">{{ recipe.name }}</a>
+        </h2>
+        <h2><a href="{% url 'user_list' recipe.pk %}">{{ user.name }}</a></h2>
+        <p class="recipe-card-date">{{ recipe.updated }}</p>
+      </div>
+      {% endfor %}
+    {% endfor %}
+  </main>
+{% endblock content %}

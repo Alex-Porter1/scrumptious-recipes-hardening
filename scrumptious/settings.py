@@ -34,8 +34,8 @@ ALLOWED_HOSTS = ["localhost", ".herokuapp.com"]
 
 LOGIN_URL = "login"
 LOGOUT_URL = "logout"
-LOGIN_REDIRECT_URL = "meal_plans_list"
-LOGOUT_REDIRECT_URL = "meal_plans_list"
+# LOGIN_REDIRECT_URL = "meal_plans_list"
+# LOGOUT_REDIRECT_URL = "meal_plans_list"
 
 # AUTH_USER_MODEL = "Recipes.User"
 

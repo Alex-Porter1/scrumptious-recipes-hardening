@@ -7,9 +7,44 @@
         <a href="{% url 'meal_plan_edit' mealplan.id %}">Edit</a>
         <a href="{% url 'meal_plan_delete' mealplan.id %}">Delete</a>
     </div>
-    <h1>{{ meal_plan.name }}</h1>
-    <h2>{{ meal_plan.date }}</h2>
-    <h2>by: {{ meal_plan.owner | default_if_none:"Unknown" }}</h2>
+    <h1>{{ mealplan.name }}</h1>
+    <h2>{{ mealplan.date }}</h2>
     {{ meal_plan.recipes | markdownify }}
+    <h2>Recipe</h2>
+    {% if recipe.image %}
+      <img src="{{ recipe.image }}" class="pull-right">
+    {% endif %}
+    <table>
+      <tbody>
+        {% for recipes in mealplan.recipes.all %}
+          <tr>
+            <h2>{{ recipes }}</h2>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <table>
+        <thead>
+          <tr>
+            <th colspan="2">Amount</th>
+            <th>Food item</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for ingredient in recipe.ingredients.all %}
+            <tr>
+              <td>{{ ingredient.amount }}</td>
+              <td>{{ ingredient.measure.name }}</td>
+              <td>{{ ingredient.food.name }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <h2>Steps</h2>
+      <ol>
+        {% for step in recipe.steps.all %}
+          <li>{{ step.directions }}</li>
+        {% endfor %}
+      </ol>
 </main>
 {% endblock content %}

@@ -8,7 +8,7 @@ from django.core.paginator import Paginator
 from django.contrib.auth import get_user_model
 from recipes.forms import RatingForm
 
-from recipes.models import Recipe
+from recipes.models import Recipe, ShoppingItem
 
 
 def log_rating(request, recipe_id):
@@ -76,3 +76,9 @@ class UserListView(ListView):
     model = get_user_model
     template_name = "recipes/users.html"
 
+
+class ShoppingItemsListView(LoginRequiredMixin, ListView):
+    model = ShoppingItem
+
+    def get_queryset(self):
+        return ShoppingItem.objects.filter(owner=self.request.user)

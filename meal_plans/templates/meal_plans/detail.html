@@ -17,34 +17,9 @@
     <table>
       <tbody>
         {% for recipes in mealplan.recipes.all %}
-          <tr>
-            <h2>{{ recipes }}</h2>
-          </tr>
+            <a href="{% url 'recipe_detail' recipes.id %}">{{ recipes }}</a>
         {% endfor %}
       </tbody>
     </table>
-    <table>
-        <thead>
-          <tr>
-            <th colspan="2">Amount</th>
-            <th>Food item</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for ingredient in recipe.ingredients.all %}
-            <tr>
-              <td>{{ ingredient.amount }}</td>
-              <td>{{ ingredient.measure.name }}</td>
-              <td>{{ ingredient.food.name }}</td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-      <h2>Steps</h2>
-      <ol>
-        {% for step in recipe.steps.all %}
-          <li>{{ step.directions }}</li>
-        {% endfor %}
-      </ol>
 </main>
 {% endblock content %}

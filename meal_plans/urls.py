@@ -8,6 +8,7 @@ from meal_plans.views import (
     MealPlanDeleteView,
 )
 
+
 urlpatterns = [
     path("", MealPlanListView.as_view(), name="meal_plans_list"),
     path("<int:pk>/", MealPlanDetailView.as_view(), name="meal_plan_detail"),

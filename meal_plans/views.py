@@ -7,6 +7,7 @@ from django.views.generic.list import ListView
 from django.core.paginator import Paginator
 
 from meal_plans.models import MealPlan
+from recipes.models import Recipe
 
 
 class MealPlanListView(LoginRequiredMixin, ListView):
@@ -39,7 +40,7 @@ class MealPlanCreateView(LoginRequiredMixin, CreateView):
 class MealPlanDetailView(LoginRequiredMixin, DetailView):
     model = MealPlan
     template_name = "meal_plans/detail.html"
-
+  
     def get_queryset(self):
         return MealPlan.objects.filter(owner=self.request.user)
 

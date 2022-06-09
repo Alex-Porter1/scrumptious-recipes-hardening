@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+html,
+button,
+select,
+textarea,
+input {
+    font-family: 'Roboto';
+    font-size: 16px;
+}
+
+header nav ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    justify-items: center;
+}
+
+a,
+a:visited {
+    text-decoration: none;
+    color: #3764b9;
+}
+
+button.button {
+    background-color: #0025c9;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    color: white;
+    padding: 1em 1.5em;
+    text-transform: uppercase;
+}
+
+button.button:hover {
+    background-color: rgb(255, 255, 255);
+    border-color: #0025c9;
+    color: #0025c9;
+}
+
+button.button:active {
+    background-color: lightblue;
+}
+
+input,
+textarea {
+    border: 1px solid #000000;
+    border-radius: 4px;
+    padding: 1em 1.5em;
+}
+
+table {
+    margin: auto;
+}
+
+td,
+th {
+    padding: .25em .5em;
+}
+
+textarea {
+    resize: none;
+}
+
+.meal_plan-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2em;
+    padding: 2em;
+}
+
+.meal_plan-title {
+    margin-bottom: 0;
+
+}
+
+.meal_plan-date {
+    color: darkgray;
+}
+
+.meal_plan-form {
+    margin: 4em auto;
+    min-width: 300px;
+    max-width: 800px;
+}
+
+.meal_plan-form p {
+    display: grid;
+    grid-template-columns: 8em 1fr;
+    column-gap: 50px;
+}
+
+.meal_plan-form label {
+    text-align: right;
+
+}
+
+.meal_plan-detail {
+    margin: 4em auto;
+    line-height: 2;
+    min-width: 300px;
+    max-width: 800px;
+    text-align: center;
+    font-family: cursive
+}
+
+.pull-right {
+    float: right;
+    margin: 2em;
+}
+
+.control {
+    text-align: right;
+}
+
+.img {
+    border-radius: 50%;
+    float: left;
+    margin: 2em;
+}

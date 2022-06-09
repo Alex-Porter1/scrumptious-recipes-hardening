@@ -4,8 +4,8 @@
 {% block content %}
 <main class="meal_plan-detail">
     <div>
-        <a href="{% url 'meal_plans_edit' meal_plan.id %}">Edit</a>
-        <a href="{% url 'meal_plans_delete' meal_plan.id %}">Delete</a>
+        <a href="{% url 'meal_plan_edit' meal_plan.id %}">Edit</a>
+        <a href="{% url 'meal_plan_delete' meal_plan.id %}">Delete</a>
     </div>
     <h1>{{ meal_plan.name }}</h1>
     <h2>{{ meal_plan.date }}</h2>

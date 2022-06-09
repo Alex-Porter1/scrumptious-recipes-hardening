@@ -82,3 +82,16 @@ class ShoppingItemsListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return ShoppingItem.objects.filter(owner=self.request.user)
+
+
+def shoppingitems_create(request, ingredients_id):
+    if request.method == "POST":
+        form = RatingForm(request.POST)
+        if form.is_valid():
+            try:
+                ShoppingItem = form.save(commit=False)
+                ShoppingItem.recipe = Recipe.objects.get(pk=ingredients_id)
+                ShoppingItem.save()
+            except Recipe.DoesNotExist:
+                return redirect("recipe_list")
+    return redirect("shoppingitems_list", pk=ingredients_id)

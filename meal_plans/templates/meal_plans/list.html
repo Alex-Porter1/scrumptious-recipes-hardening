@@ -5,7 +5,7 @@
     {% for meal_plan in meal_plans_list %}
     <div class="meal_plan-card">
         <h2 class="meal_plan-card-title">
-            <a href="{% url 'meal_plan_detail' 1 %}">{{ meal_plan.name }}</a>
+            <a href="{% url 'meal_plan_detail' meal_plan.pk %}">{{ meal_plan.name }}</a>
         </h2>
         <p class="meal_plan-card-date">{{ meal_plan.updated }}</p>
     </div>

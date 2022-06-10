@@ -6,7 +6,7 @@ from recipes.views import (
     RecipeUpdateView,
     log_rating,
     shoppingitems_create,
-    # shoppingitems_delete,
+    shoppingitems_delete,
     ShoppingItemsListView,
     RecipeDetailView,
     RecipeListView,
@@ -22,6 +22,6 @@ urlpatterns = [
     path("<int:recipe_id>/ratings/", log_rating, name="recipe_rating"),
     path("", UserListView.as_view(), name="user_list"),
     path("shoppingitems/create/", shoppingitems_create, name="shoppingitems_create"),
-    # path("shopping_items/delete/", shoppingitems_delete, name="shoppingitems_delete"),
+    path("shopping_items/delete/", shoppingitems_delete, name="shoppingitems_delete"),
     path("", ShoppingItemsListView.as_view(), name="shoppingitems_list")
 ]

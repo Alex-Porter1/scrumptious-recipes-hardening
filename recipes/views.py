@@ -48,6 +48,13 @@ class RecipeDetailView(DetailView):
         context["rating_form"] = RatingForm()
         return context
 
+        food = []
+
+        for item in self.request.user.shopping_items.all():
+            food.append(item.food_item)
+
+        context["food_in_shopping_list"] = food
+
 
 class RecipeCreateView(LoginRequiredMixin, CreateView):
     model = Recipe

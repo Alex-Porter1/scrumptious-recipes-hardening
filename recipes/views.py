@@ -48,12 +48,12 @@ class RecipeDetailView(DetailView):
         context["rating_form"] = RatingForm()
         return context
 
-        food = []
+        foods = []
 
         for item in self.request.user.shopping_items.all():
-            food.append(item.food_item)
-
-        context["food_in_shopping_list"] = food
+            foods.append(item.food_item)
+        context["food_in_shopping_list"] = foods
+        return context
 
 
 class RecipeCreateView(LoginRequiredMixin, CreateView):
@@ -87,14 +87,14 @@ class UserListView(ListView):
 
 class ShoppingItemsListView(LoginRequiredMixin, ListView):
     model = ShoppingItem
-    template_name = "shopping_items/list.html"
+    template_name = "recipes/shopping.html"
 
     def get_queryset(self):
-        return ShoppingItem.objects.filter(owner=self.request.user)
+        return ShoppingItem.objects.filter(user=self.request.user)
 
 
 @require_http_methods(["POST"])
-def shoppingitems_create(request):
+def create_shopping_item(request):
     ingredient_id = request.POST.get("ingredient_id")
     ingredient = Ingredient.objects.get(id=ingredient_id)
     user = request.user
@@ -107,6 +107,6 @@ def shoppingitems_create(request):
 
 
 @require_http_methods(["POST"])
-def shoppingitems_delete(request):
+def delete_all_shopping_items(request):
     ShoppingItem.objects.filter(user=request.user).delete()
     return redirect("shopping_item_list")

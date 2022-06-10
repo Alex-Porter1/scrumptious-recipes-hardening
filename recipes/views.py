@@ -1,3 +1,4 @@
+from django.db import IntegrityError
 from django.shortcuts import redirect, render
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
@@ -7,8 +8,8 @@ from django.views.generic.list import ListView
 from django.core.paginator import Paginator
 from django.contrib.auth import get_user_model
 from recipes.forms import RatingForm
-
-from recipes.models import Recipe, ShoppingItem
+from django.views.decorators.http import require_http_methods
+from recipes.models import FoodItem, Ingredient, Recipe, ShoppingItem
 
 
 def log_rating(request, recipe_id):
@@ -79,19 +80,26 @@ class UserListView(ListView):
 
 class ShoppingItemsListView(LoginRequiredMixin, ListView):
     model = ShoppingItem
+    template_name = "shopping_items/list.html"
 
     def get_queryset(self):
         return ShoppingItem.objects.filter(owner=self.request.user)
 
 
-def shoppingitems_create(request, ingredients_id):
-    if request.method == "POST":
-        form = RatingForm(request.POST)
-        if form.is_valid():
-            try:
-                ShoppingItem = form.save(commit=False)
-                ShoppingItem.recipe = Recipe.objects.get(pk=ingredients_id)
-                ShoppingItem.save()
-            except Recipe.DoesNotExist:
-                return redirect("recipe_list")
-    return redirect("shoppingitems_list", pk=ingredients_id)
+@require_http_methods(["POST"])
+def shoppingitems_create(request):
+    ingredient_id = request.POST.get("ingredient_id")
+    ingredient = Ingredient.objects.get(id=ingredient_id)
+    user = request.user
+    try:
+        ShoppingItem.objects.create(food_item=ingredient.food, user=user)
+    except IntegrityError:
+        pass
+
+    return redirect("recipe_detail", pk=ingredient.recipe.id)
+
+
+@require_http_methods(["POST"])
+def shoppingitems_delete(request):
+    ShoppingItem.objects.filter(user=request.user).delete()
+    return redirect("shopping_item_list")
